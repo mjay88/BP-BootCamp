@@ -1,4 +1,6 @@
 import React from "react";
+import { auth, provider } from "../firebase";
+import { auth } from "../Contexts";
 
 function Authbox({ register }) {
   return (

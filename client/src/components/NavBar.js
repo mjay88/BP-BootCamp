@@ -1,7 +1,7 @@
 import { menuItems } from "../menuItems";
 import MenuItems from "./MenuItems";
 
-const Navbar = () => {
+const NavBar = () => {
   //create prop
 
   return (
@@ -23,4 +23,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

@@ -44,7 +44,7 @@ app.use("/api/auth", authRoute);
 
 //connect to database
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGODB_URL || "mongodb://localhost/BP-BootCamp")
   .then(() => {
     console.log("Connected to BPC Database");
 
