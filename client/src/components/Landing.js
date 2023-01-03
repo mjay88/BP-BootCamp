@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthProvider } from "../Contexts/AuthContext/index";
 
-function Landing({ register }) {
+function Landing({ register, login }) {
   return (
     <div className="App">
       <section class="py-24 flex items-center min-h-screen justify-center bg-black">
@@ -22,6 +23,7 @@ function Landing({ register }) {
           <div class="mt-6 flex items-center justify-center gap-4">
             <Link
               to="/Authbox"
+              state={(login = true)}
               class="transform rounded-md bg-orange-400/95 px-5 py-3 font-medium text-black-400 transition-colors hover:bg-orange-50"
             >
               Login

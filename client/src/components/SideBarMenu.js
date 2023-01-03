@@ -21,7 +21,7 @@ const SideBarMenu = ({ items, depthLevel }) => {
       document.removeEventListener("touchstart", handler);
     };
   }, [accordion]);
-  console.log(depthLevel);
+  // console.log(depthLevel);
   //toggle droppdown for mouse hover on large screens
   const onMouseEnter = () => {
     window.innerWidth > 960 && setAccordion(true);
