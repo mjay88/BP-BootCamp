@@ -10,7 +10,7 @@ const NavBar = () => {
         const depthLevel = 0;
 
         return (
-          <li className="menu-items" key={index}>
+          <li className="menu-items text-white " key={index}>
             <MenuItems
               items={menu}
               key={index}

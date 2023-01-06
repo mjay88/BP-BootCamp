@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 //useAuthProvider is a function that returns our AuthContext, AuthProvider is a container we created that wraps our app and is how we access all the firebase methods for authentication.
 import { useAuth, AuthContext } from "../Contexts/AuthContext/index";
 import { auth, provider } from "../firebase";
 
-//register and login prop from landing page, if user click "register" button, navigate to authbox component passing register prop (true) to conditionally render register box, if login prop true show login conditionally rendering.
-function Authbox({ register }) {
+//register and login prop from landing page, if user click "register" button, navigate to Register component passing register prop (true) to conditionally render register box, if login prop true show login conditionally rendering.
+function Register({ register }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const { currentUser, logout, signUpWithGoogle, signUp, login } = useAuth();
+  const [confirmPassword, confirmSetPassword] = useState("");
+  const {
+    currentUser,
+    signUpWithGoogle,
+    signup,
+    googleSignIn,
+    facebookSignIn,
+  } = useAuth();
 
   let navigate = useNavigate();
 
@@ -18,10 +25,30 @@ function Authbox({ register }) {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
-      navigate("/Home");
+      await signup(email, password);
+      navigate("/");
     } catch (err) {
       setError(err.message);
+    }
+  };
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleFacebookSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await facebookSignIn();
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -33,21 +60,12 @@ function Authbox({ register }) {
         <header className="flex w-full justify-end">
           {/* buttons */}
           <div>
-            <button
-              type="button"
-              x-show="isLoginPage"
-              className="transform rounded-md bg-orange-400/95 px-5 py-3 font-medium text-black-400 transition-colors hover:bg-orange-50"
+            <Link
+              to="/Login"
+              class="transform rounded-md bg-orange-400/95 px-5 py-3 font-medium text-black-400 transition-colors hover:bg-orange-50 active:translate-y-[0.125rem]"
             >
               LOGIN
-            </button>
-
-            <button
-              type="button"
-              x-show="!isLoginPage"
-              className="transform rounded-md bg-orange-400/95 px-5 py-3 font-medium text-black-400 transition-colors hover:bg-orange-50 active:translate-y-[0.125rem]"
-            >
-              SIGN UP
-            </button>
+            </Link>
           </div>
         </header>
 
@@ -55,7 +73,7 @@ function Authbox({ register }) {
           {/* register content */}
           <form onSubmit={handleSubmit}>
             <div x-show="isLoginPage" className="space-y-4">
-              <header className="mb-3 text-2xl font-bold">
+              <header className="mb-3 text-2xl font-bold text-white">
                 Create your profile
               </header>
 
@@ -84,40 +102,22 @@ function Authbox({ register }) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
+              <div className="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
+                <input
+                  type="password"
+                  placeholder="confirm password"
+                  className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
+                  onChange={(e) => confirmSetPassword(e.target.value)}
+                />
+              </div>
               <button
-                className="w-full rounded-2xl border-b-4 border-b-blue-600 bg-black py-3 font-bold text-white hover:bg-blue-400 active:translate-y-[0.125rem] active:border-b-blue-400"
-                type="submit"
+                className="w-full rounded-2xl bg-orange-400/95 py-3 font-bold text-black-400 transition-colors hover:bg-orange-50 active:translate-y-[0.125rem]"
+                type="Submit"
               >
                 CREATE ACCOUNT
               </button>
             </div>
             ;{/* login content */}
-            <div x-show="!isLoginPage" className="space-y-4">
-              <header className="mb-3 text-2xl font-bold">Log in</header>
-              <div className="w-full rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className="my-3 w-full border-none bg-transparent outline-none focus:outline-none"
-                />
-              </div>
-              <div className="flex w-full items-center space-x-2 rounded-2xl bg-gray-50 px-4 ring-2 ring-gray-200 focus-within:ring-blue-400">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="my-3 w-full border-none bg-transparent outline-none"
-                />
-                <a
-                  href="#"
-                  className="font-medium text-gray-400 hover:text-gray-500"
-                >
-                  FORGOT?
-                </a>
-              </div>
-              <button className="w-full rounded-2xl bg-orange-400/95 py-3 font-bold text-black-400 transition-colors hover:bg-orange-50 active:translate-y-[0.125rem] ">
-                LOG IN
-              </button>
-            </div>
             <div className="flex items-center space-x-4">
               <hr className="w-full border border-gray-300" />
               <div className="font-semibold text-gray-400">OR</div>
@@ -129,12 +129,14 @@ function Authbox({ register }) {
               <a
                 href="#"
                 className="rounded-2xl bg-orange-400/95 py-2.5 px-4 font-bold text-black-700 ring-2 ring-gray-200 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200"
+                onClick={handleFacebookSignIn}
               >
                 FACEBOOK
               </a>
               <a
                 href="#"
                 className="rounded-2xl bg-orange-400/95 py-2.5 px-4 font-bold text-black-700 ring-2 ring-gray-200 hover:bg-gray-200 active:translate-y-[0.125rem] active:border-b-gray-200"
+                onClick={handleGoogleSignIn}
               >
                 GOOGLE
               </a>
@@ -158,4 +160,4 @@ function Authbox({ register }) {
   );
 }
 
-export default Authbox;
+export default Register;

@@ -12,6 +12,9 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  FacebookAuthProvider,
 } from "firebase/auth";
 
 // We first build a context provider called AuthProvider and then pass in the children. Then we import a few of Firebase methods (createUserWithEmailAndPassword , signInWithEmailAndPassword , and signOut) from our Firebase auth module. These methods are used to develop functions for creating, logging in, and signing out users through email and password. We also import a method named onAuthStateChanged, which monitors authentication status changes and returns the current user. We construct a function called useAuth and wrap it in a custom hook called useContext to make it available to our app (through the use of the Context API).
@@ -37,10 +40,6 @@ const globalReducer = (state, action) => {
 
 export const AuthContext = createContext(initialState);
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
 //3.
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
@@ -55,22 +54,14 @@ export const AuthProvider = ({ children }) => {
       .then(() => dispatch({ type: "SET_LOGGED_IN", payload: true }));
   }
 
-  function signup(name, email, password) {
-    return auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => (result.additionalUserInfo.isNewUser ? result : false));
+  function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
   }
-
-  async function login(email, password) {
-    return auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => dispatch({ type: "SET_LOGGED_IN", payload: true }));
+  function signup(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
   }
-
   function logout() {
-    return auth
-      .signOut()
-      .then(() => dispatch({ type: "SET_LOGGED_IN", payload: false }));
+    return signOut(auth);
   }
 
   function updatePhotoURL(image) {
@@ -81,6 +72,37 @@ export const AuthProvider = ({ children }) => {
     return currentUser.updateProfile({ displayName: name });
   }
 
+  function googleSignIn() {
+    const googleAuthProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleAuthProvider);
+  }
+  function facebookSignIn() {
+    const facebookAuthprovider = new FacebookAuthProvider();
+    return signInWithPopup(auth, facebookAuthprovider);
+    // signInWithPopup(auth, provider)
+    //   .then((result) => {
+    //     // The signed-in user info.
+    //     const user = result.user;
+
+    //     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    //     const credential = FacebookAuthProvider.credentialFromResult(result);
+    //     const accessToken = credential.accessToken;
+
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     // Handle Errors here.
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     // The email of the user's account used.
+    //     const email = error.customData.email;
+    //     // The AuthCredential type that was used.
+    //     const credential = FacebookAuthProvider.credentialFromError(error);
+
+    //     // ...
+    //   });
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -89,14 +111,14 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     setCurrentUser(user);
+  //     setLoading(false);
+  //   });
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
   const value = {
     ...state,
@@ -107,7 +129,13 @@ export const AuthProvider = ({ children }) => {
     updatePhotoURL,
     signupWithGoogle,
     updateDisplayName,
+    googleSignIn,
+    facebookSignIn,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+//We construct a function called userAuth and wrap it in a custom hook called useContext to make it available to our app (through the use of the Context API).
+export function useAuth() {
+  return useContext(AuthContext);
+}
