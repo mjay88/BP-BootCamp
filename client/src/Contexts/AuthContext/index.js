@@ -44,8 +44,7 @@ export const AuthContext = createContext(initialState);
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
   const [loading, setLoading] = useState(true);
-
-  const [currentUser, setCurrentUser] = useState();
+  const [user, setUser] = useState({});
 
   async function signupWithGoogle() {
     auth
@@ -64,13 +63,13 @@ export const AuthProvider = ({ children }) => {
     return signOut(auth);
   }
 
-  function updatePhotoURL(image) {
-    return currentUser.updateProfile({ photoURL: image });
-  }
+  // function updatePhotoURL(image) {
+  //   return currentUser.updateProfile({ photoURL: image });
+  // }
 
-  function updateDisplayName(name) {
-    return currentUser.updateProfile({ displayName: name });
-  }
+  // function updateDisplayName(name) {
+  //   return currentUser.updateProfile({ displayName: name });
+  // }
 
   function googleSignIn() {
     const googleAuthProvider = new GoogleAuthProvider();
@@ -79,37 +78,25 @@ export const AuthProvider = ({ children }) => {
   function facebookSignIn() {
     const facebookAuthprovider = new FacebookAuthProvider();
     return signInWithPopup(auth, facebookAuthprovider);
-    // signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //     // The signed-in user info.
-    //     const user = result.user;
-
-    //     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    //     const credential = FacebookAuthProvider.credentialFromResult(result);
-    //     const accessToken = credential.accessToken;
-
-    //     // ...
-    //   })
-    //   .catch((error) => {
-    //     // Handle Errors here.
-    //     const errorCode = error.code;
-    //     const errorMessage = error.message;
-    //     // The email of the user's account used.
-    //     const email = error.customData.email;
-    //     // The AuthCredential type that was used.
-    //     const credential = FacebookAuthProvider.credentialFromError(error);
-
-    //     // ...
-    //   });
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
+      console.log("Auth", currentuser);
+      setUser(currentuser);
     });
 
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+    };
   }, []);
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     setCurrentUser(user);
+  //   });
+
+  //   return unsubscribe;
+  // }, []);
 
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -122,13 +109,13 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     ...state,
-    currentUser,
+    user,
     login,
     signup,
     logout,
-    updatePhotoURL,
+    // updatePhotoURL,
     signupWithGoogle,
-    updateDisplayName,
+    // updateDisplayName,
     googleSignIn,
     facebookSignIn,
   };
