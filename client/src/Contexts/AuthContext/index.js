@@ -16,7 +16,7 @@ import {
   signInWithPopup,
   FacebookAuthProvider,
 } from "firebase/auth";
-
+import { API } from "../../utils/API";
 // We first build a context provider called AuthProvider and then pass in the children. Then we import a few of Firebase methods (createUserWithEmailAndPassword , signInWithEmailAndPassword , and signOut) from our Firebase auth module. These methods are used to develop functions for creating, logging in, and signing out users through email and password. We also import a method named onAuthStateChanged, which monitors authentication status changes and returns the current user. We construct a function called useAuth and wrap it in a custom hook called useContext to make it available to our app (through the use of the Context API).
 
 //2.
@@ -50,6 +50,16 @@ export const AuthProvider = ({ children }) => {
     auth
       .signInWithPopup(provider)
       .then((result) => (result.additionalUserInfo.isNewUser ? result : false))
+      .then((result) => {
+        if (result) {
+          const newUser = {
+            uid: result.user.uid,
+            userName: result.user.displayName,
+          };
+          console.log(newUser);
+          API.saveUser(newUser);
+        }
+      })
       .then(() => dispatch({ type: "SET_LOGGED_IN", payload: true }));
   }
 

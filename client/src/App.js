@@ -35,6 +35,7 @@ const App = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
         </Route>
+
         <Route element={<Layout />}>
           {/* <Route index element={<Home />} /> */}
           <Route
@@ -45,6 +46,7 @@ const App = () => {
               </ProtectedRoutes>
             }
           />
+          {/* <ProtectedRoutes path="/" element={<Home />} /> */}
           <Route path="progress" element={<Progress />} />
           <Route path="agave" element={<Agave />} />
           <Route path="amari" element={<Amari />} />

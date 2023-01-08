@@ -25,9 +25,12 @@ const Header = () => {
           <img src={Logo} />
         </a>
         <NavBar />
+
         <button className="text-white" onClick={handleLogOut}>
           Logout
         </button>
+
+        <div className="text-white">{user ? user.displayName : ""}</div>
       </div>
     </header>
   );

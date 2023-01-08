@@ -4,7 +4,11 @@ const Schema = mongoose.Schema;
 //the Schema is a format for how data will be stored in our database.
 const userSchema = new Schema(
   {
-    name: {
+    uid: {
+      type: String,
+      required: true,
+    },
+    userName: {
       type: String,
       required: true,
     },
@@ -12,11 +16,12 @@ const userSchema = new Schema(
       //define what type of data
       type: String,
       //throws and error if a user is not present when we try to store a user
-      required: true,
+      //if you sign in with google, you won't automatically have an email associated
+      // required: true,
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
     reset_code: {
       type: String,

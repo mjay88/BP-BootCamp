@@ -38,9 +38,9 @@ app.use((req, res, next) => {
 
   next();
 });
-
-app.use("/", defaultRoutes);
-app.use("/api/auth", authRoute);
+app.use(defaultRoutes);
+// app.use("/", defaultRoutes);
+// app.use("/api/auth", authRoute);
 
 //connect to database
 mongoose
