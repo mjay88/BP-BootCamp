@@ -32,10 +32,19 @@ function Register({ register }) {
     }
   };
 
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     navigate("/Landing");
+  //   } else if (currentUser) {
+  //     navigate("/");
+  //   }
+  // }, [currentUser]);
+
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await googleSignIn();
+      console.log("signup function");
+      await signUpWithGoogle();
       navigate("/");
     } catch (error) {
       console.log(error.message);

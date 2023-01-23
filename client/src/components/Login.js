@@ -36,7 +36,8 @@ function Login({ register }) {
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await googleSignIn();
+      console.log("signup function");
+      await signUpWithGoogle();
       navigate("/");
     } catch (error) {
       console.log(error.message);

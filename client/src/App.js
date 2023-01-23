@@ -35,18 +35,8 @@ const App = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
         </Route>
-
-        <Route element={<Layout />}>
-          {/* <Route index element={<Home />} /> */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoutes>
-                <Home />
-              </ProtectedRoutes>
-            }
-          />
-          {/* <ProtectedRoutes path="/" element={<Home />} /> */}
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<Home />} />
           <Route path="progress" element={<Progress />} />
           <Route path="agave" element={<Agave />} />
           <Route path="amari" element={<Amari />} />
@@ -72,10 +62,7 @@ const App = () => {
             path="discussing-vodkas-taste-and-style"
             element={<div>tasty-taste</div>}
           />
-          <Route
-            path="discussing-vodkas-taste-and-style"
-            element={<div>tasty-taste</div>}
-          />
+
           <Route
             path="other-neutral-spirits"
             element={<div>Other Neutral Spirits</div>}

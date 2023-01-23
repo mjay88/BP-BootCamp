@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
 
-  async function signupWithGoogle() {
+  async function signUpWithGoogle() {
     auth
       .signInWithPopup(provider)
       .then((result) => (result.additionalUserInfo.isNewUser ? result : false))
@@ -90,23 +90,25 @@ export const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, facebookAuthprovider);
   }
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      console.log("Auth", currentuser);
-      setUser(currentuser);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
   // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     setCurrentUser(user);
+  //   const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
+  //     console.log("Auth", currentuser);
+  //     setUser(currentuser);
   //   });
 
-  //   return unsubscribe;
+  //   return () => {
+  //     unsubscribe();
+  //   };
   // }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return unsubscribe;
+  }, []);
 
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -124,13 +126,17 @@ export const AuthProvider = ({ children }) => {
     signup,
     logout,
     // updatePhotoURL,
-    signupWithGoogle,
+    signUpWithGoogle,
     // updateDisplayName,
     googleSignIn,
     facebookSignIn,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 //We construct a function called userAuth and wrap it in a custom hook called useContext to make it available to our app (through the use of the Context API).
 export function useAuth() {
