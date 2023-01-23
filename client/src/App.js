@@ -210,7 +210,7 @@ const App = () => {
             element={<div>History of Liquers</div>}
           />
           <Route
-            path="production-of-liquers"
+            path="production-of-liqueurs"
             element={<div>Produciton of Liquers</div>}
           />
           <Route
