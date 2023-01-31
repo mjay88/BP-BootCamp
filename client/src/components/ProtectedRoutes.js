@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext/index";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import SideBar from "./SideBar";
 import AccordionCopy from "./AccordionCopy";
 import MobileSideNav from "./MobileSideNav";
 {
@@ -11,6 +10,8 @@ import MobileSideNav from "./MobileSideNav";
 }
 
 const ProtectedRoutes = () => {
+	const [content, setContent] = useState();
+
 	const { user } = useAuth();
 
 	console.log("Check user in Private: ", user);
@@ -38,7 +39,7 @@ const ProtectedRoutes = () => {
 
 				<div className="flex justify-center lg:basis-3/4">
 					<div className="">
-						<Outlet />
+						<Outlet context={[content, setContent]} />
 					</div>
 				</div>
 			</div>

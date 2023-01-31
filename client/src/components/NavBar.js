@@ -2,25 +2,25 @@ import { menuItems } from "../menuItems";
 import MenuItems from "./MenuItems";
 
 const NavBar = () => {
-  //create prop
+	//create prop
 
-  return (
-    <ul className="flex items-center flex-wrap list-none">
-      {menuItems.map((menu, index) => {
-        const depthLevel = 0;
+	return (
+		<ul className="flex items-center flex-wrap list-none">
+			{menuItems.map((menu, index) => {
+				const depthLevel = 0;
 
-        return (
-          <li className="menu-items text-white " key={index}>
-            <MenuItems
-              items={menu}
-              key={index}
-              depthLevel={depthLevel}
-            ></MenuItems>
-          </li>
-        );
-      })}
-    </ul>
-  );
+				return (
+					<li className="text-white" key={index}>
+						<MenuItems
+							items={menu}
+							key={index}
+							depthLevel={depthLevel}
+						></MenuItems>
+					</li>
+				);
+			})}
+		</ul>
+	);
 };
 
 export default NavBar;

@@ -2,11 +2,8 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import AccordionCopy from "./AccordionCopy";
-import { useState } from "react";
 
 export default function MobileSideNav() {
-	const [open, setOpen] = useState(false);
-
 	// create state variables to track the user with useStates
 	return (
 		<div className="fixed top-26 py-4 w-full max-w-sm px-4">

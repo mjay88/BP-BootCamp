@@ -1,10 +1,5 @@
 const Home = () => {
-  return (
-    <>
-      Home, this is home, why isnt the other element rendering like this one?
-      Why?
-    </>
-  );
+	return <>Home, in routes. Welcome Back! </>;
 };
 
 export default Home;

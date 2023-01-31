@@ -23,7 +23,9 @@ import Login from "./components/Login";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Module from "./components/Module";
 //context
+//auth providerr takes priotiry over other state
 import { AuthProvider } from "./Contexts/AuthContext/index";
+//withRouter???
 
 const App = () => {
 	return (
@@ -38,6 +40,7 @@ const App = () => {
 				<Route element={<ProtectedRoutes />}>
 					<Route path="/" element={<Home />} />
 					<Route path="progress" element={<Progress />} />
+					<Route path="getHelp" element={<GetHelp />} />
 					<Route path="agave" element={<Agave />} />
 					<Route path="amari" element={<Amari />} />
 					<Route path="cocktology" element={<Cocktology />} />
@@ -53,14 +56,12 @@ const App = () => {
 						path="/history-of-vodka"
 						//replace the div with the History of Vodka component
 						element={<Module />}
+						// element={<Module content={item.content} />}????
 					/>
-					<Route
-						path="production-of-vodka"
-						element={<div>production-of-vodka</div>}
-					/>
+					<Route path="production-of-vodka" element={<Module />} />
 					<Route
 						path="discussing-vodkas-taste-and-style"
-						element={<div>tasty-taste</div>}
+						element={<Module />}
 					/>
 
 					<Route
