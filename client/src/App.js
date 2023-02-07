@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "./components/Landing";
 import Authbox from "./components/Authbox";
 import Home from "./routes/Home";
+
 import Agave from "./routes/Agave";
 import Amari from "./routes/Amari";
 import Cocktology from "./routes/Cocktology";
@@ -13,11 +14,15 @@ import Liquers from "./routes/Liquers";
 import Progress from "./routes/Progress";
 import Rum from "./routes/Rum";
 import Vermouth from "./routes/Vermouth";
-import Vodka from "./routes/Vodka";
 import Whiskey from "./routes/Whiskey";
 import GetHelp from "./routes/GetHelp";
 import PublicLayout from "./components/PublicLayout";
-import HistoryOfVodka from "./routes/HistoryOfVodka";
+//vodka
+import HistoryOfVodka from "./routes/Vodka/HistoryOfVodka";
+import ProductionOfVodka from "./routes/Vodka/ProductionOfVodka";
+import DiscussingVodkasTasteAndStyle from "./routes/Vodka/DiscussingVodkasTasteAndStyle";
+import BaijuShochuAndSoju from "./routes/Vodka/BaijuShochuAndSoju";
+
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ProtectedRoutes from "./components/ProtectedRoutes";
@@ -51,17 +56,16 @@ const App = () => {
 					<Route path="vermouth" element={<Vermouth />} />
 					<Route path="whiskey" element={<Whiskey />} />
 					<Route path="getHelp" element={<GetHelp />} />
-					<Route path="vodka" element={<Vodka />} />
 					<Route
-						path="/history-of-vodka"
+						path="history-of-vodka"
 						//replace the div with the History of Vodka component
+						// element={<HistoryOfVodka />}
 						element={<Module />}
-						// element={<Module content={item.content} />}????
 					/>
-					<Route path="production-of-vodka" element={<Module />} />
+					<Route path="production-of-vodka" element={<ProductionOfVodka />} />
 					<Route
 						path="discussing-vodkas-taste-and-style"
-						element={<Module />}
+						element={<DiscussingVodkasTasteAndStyle />}
 					/>
 
 					<Route
@@ -70,7 +74,7 @@ const App = () => {
 					/>
 					<Route
 						path="baijiu-shochu-and-soju"
-						element={<div>Baiju shochu and soju</div>}
+						element={<BaijuShochuAndSoju />}
 					/>
 					<Route
 						path="production-of-gin"

@@ -1,4 +1,3 @@
-import NavBar from "./NavBar";
 import Logo from "../assets/Logo.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/AuthContext/index";
@@ -6,6 +5,7 @@ import { useEffect, useState } from "react";
 import { API } from "../utils/API";
 import Navigation from "./Navigation";
 import MobileNavigation from "./MobileNavigation";
+
 const Header = () => {
 	const { logout, user } = useAuth();
 	const [currentUser, setCurrentUser] = useState("");
@@ -65,7 +65,6 @@ const Header = () => {
 						Logout
 					</button>
 
-					{/* <div className="text-white">{user ? user.displayName : ""}</div> */}
 					<div className="text-white px-1 pl-3">
 						{currentUser.length > 0 ? currentUser : ""}
 					</div>

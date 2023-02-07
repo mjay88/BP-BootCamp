@@ -1,55 +1,8 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { Popover } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { sideBarMenuItems } from "../sideBarMenuItems";
-import { useState } from "react";
-
-const Module = ({ submenus }) => {
-	//need to get the url from next and previous index of sideBarMenuItems
-	//need to be able to render route by using url, how will this work with module component?
-	const location = useLocation();
-	const [preceding, setPreceding] = useState({});
-	const [next, setNext] = useState({});
-
-	console.log(location.pathname, "location");
-
-	const content = location.state.content;
-	console.log(content, "content");
-
-	function findPreceding(arr) {
-		setPreceding(
-			arr.findIndex((e) => {
-				console.log(e);
-				return e.submenu.findIndex((e) => {
-					return e.url === location.pathname;
-				});
-			})
-		);
-	}
-	useEffect(() => {
-		console.log(findPreceding(sideBarMenuItems));
-	}, []);
-	console.log(preceding, "preceding");
+export default function PreviousAndNext() {
 	return (
 		<div className="flex flex-col py-4 px-4">
-			<h1 className="self-center">{location.state.from}</h1>
-			{content.map((item, index) => {
-				return (
-					<>
-						<div className="flex">
-							{item.slice(-3) === "jpg" ? (
-								<img className="object-contain" src={item} />
-							) : (
-								<div className="flex-1" key={index}>
-									{item}
-								</div>
-							)}
-						</div>
-						;
-					</>
-				);
-			})}
+			<h1 className="self-center"></h1>
+
 			<div className="flex justify-between left-0 bottom-25 max-w-sm px-4 self-center">
 				<button
 					className={`
@@ -94,6 +47,4 @@ const Module = ({ submenus }) => {
 			</div>
 		</div>
 	);
-};
-
-export default Module;
+}

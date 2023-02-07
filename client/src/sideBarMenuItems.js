@@ -3,7 +3,6 @@ import ColumnStill from "./assets/ColumnStill.jpg";
 import Martini from "./assets/Martini.jpg";
 
 export const sideBarMenuItems = [
-	//whats the deal with the back slashes?
 	{
 		title: "Vodka",
 		// url: "/vodka",
@@ -61,7 +60,7 @@ export const sideBarMenuItems = [
 			},
 			{
 				title: "Other Neutral Spirits",
-				url: "other-neutral-spirits",
+				// url: "other-neutral-spirits",
 				submenu: [
 					{
 						title: "Baijiu, Shochu, and Soju",
@@ -82,7 +81,6 @@ export const sideBarMenuItems = [
 					},
 				],
 			},
-			{ title: "Tasting And Serving Vodka" },
 		],
 	},
 	{

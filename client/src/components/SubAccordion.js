@@ -17,13 +17,21 @@ export default function SubAccordion({ submenus }) {
 			<div className="bg-white rounded-2xl">
 				{submenus.map((submenu, index) => {
 					return (
-						<Disclosure>
+						<Disclosure key={index}>
 							{({ open }) => (
 								<>
 									<Link
 										to={submenu.url}
-										//
-										state={{ from: submenu.title, content: submenu.content }}
+										//pass the entires menu through here, then its easy to get previous and next
+										state={{
+											from: submenu.title,
+											content: submenu.content,
+											key: index,
+											currentSubmenusIdx: submenus.indexOf(submenu),
+											precedingUrl: "",
+											nextUrl: "",
+											navTree: submenus,
+										}}
 									>
 										<Disclosure.Button className="flex justify-between w-full px-0 py-1 mb-1 text-lg font-medium text-center text-slate-300 bg-black rounded-lg hover:bg-black-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
 											{/* button text */}

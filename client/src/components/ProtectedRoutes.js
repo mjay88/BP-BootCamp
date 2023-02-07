@@ -5,13 +5,12 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import AccordionCopy from "./AccordionCopy";
 import MobileSideNav from "./MobileSideNav";
+import PreviousAndNext from "./PreviousAndNext";
 {
 	/**we pass the ProtectedRoutes component as the element of <Route> wrapping the protected routes. Since we need to preserve the Layout, I placed that inside of the render for the ProtectedRoutes component.  */
 }
 
 const ProtectedRoutes = () => {
-	const [content, setContent] = useState();
-
 	const { user } = useAuth();
 
 	console.log("Check user in Private: ", user);
@@ -39,7 +38,8 @@ const ProtectedRoutes = () => {
 
 				<div className="flex justify-center lg:basis-3/4">
 					<div className="">
-						<Outlet context={[content, setContent]} />
+						<Outlet />
+						{/* <PreviousAndNext /> */}
 					</div>
 				</div>
 			</div>

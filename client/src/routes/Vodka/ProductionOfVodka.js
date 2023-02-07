@@ -1,13 +1,12 @@
 import React from "react";
-import VodkaBottles from "../assets/VodkaBottles.jpg";
-import ColumnStill from "../assets/ColumnStill.jpg";
-import Martini from "../assets/Martini.jpg";
-import Module from "../components/Module";
+import VodkaBottles from "../../assets/VodkaBottles.jpg";
+import ColumnStill from "../../assets/ColumnStill.jpg";
+import Martini from "../../assets/Martini.jpg";
 
-const HistoryOfVodka = ({ submenus }) => {
+export default function ProductionOfVodka() {
 	return (
 		<div className="flex flex-col py-4 px-4">
-			<h1 className="flex justify-center my-5 text-lg">History of Vodka</h1>
+			<h1 className="flex justify-center my-5 text-lg">Production of Vodka</h1>
 			{/* <Module submenus={submenu} /> */}
 			<div className="flex flex-col lg:grid grid-cols-4 gap-3">
 				<div className="flex-1 lg:col-span-2">
@@ -176,6 +175,4 @@ const HistoryOfVodka = ({ submenus }) => {
 			</div>
 		</div>
 	);
-};
-
-export default HistoryOfVodka;
+}
