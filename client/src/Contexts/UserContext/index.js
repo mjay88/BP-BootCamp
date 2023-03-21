@@ -86,15 +86,15 @@ export const GlobalProvider = (props) => {
 
 	//fetch call to database for user...we need to update our model
 	useEffect(() => {
-		getCurrentUser();
+		// getCurrentUser();
 	}, []);
 
 	//action : SET_USER
-	const getCurrentUser = async () => {
-		if (user) {
-			API.getUser(user.uid).then((res) => {
-				dispatch({ type: "SET_USER", payload: res.data[0].userName });
-			});
-		}
-	};
+	// const getCurrentUser = async () => {
+	// 	if (user) {
+	// 		API.getUser(user.uid).then((res) => {
+	// 			dispatch({ type: "SET_USER", payload: res.data[0].userName });
+	// 		});
+	// 	}
+	// };
 };

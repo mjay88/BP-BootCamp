@@ -17,7 +17,11 @@ export default function AccordionCopy() {
 										key={index}
 										className="flex justify-between w-full mb-1 px-4 py-2 text-lg font-medium text-center text-slate-300 bg-black rounded-lg hover:bg-black-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75"
 									>
-										<Link key={index} to={menuItem.url}>
+										<Link
+											key={index}
+											to={menuItem.url}
+											onClick={(event) => event.preventDefault()}
+										>
 											{menuItem.title}
 										</Link>
 										{menuItem.submenu ? (

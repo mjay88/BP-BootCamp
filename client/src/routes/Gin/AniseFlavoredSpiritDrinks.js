@@ -4,11 +4,13 @@ import ColumnStill from "../../assets/ColumnStill.jpg";
 import Martini from "../../assets/Martini.jpg";
 import { Link } from "react-router-dom";
 
-export default function ProductionOfVodka() {
+export default function AniseFlavoredSpiritDrinks() {
 	return (
 		<div className="flex flex-col py-4 px-4">
-			<h1 className="flex justify-center my-5 text-lg">Production of Vodka</h1>
-			{/* <Module submenus={submenu} /> */}
+			<h1 className="flex justify-center my-5 text-lg">
+				Anise Flavored Spirit Drink
+			</h1>
+
 			<div className="flex flex-col lg:grid grid-cols-4 gap-3">
 				<div className="flex-1 lg:col-span-2">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam ipsam
@@ -175,7 +177,7 @@ export default function ProductionOfVodka() {
 				</div>
 			</div>
 			<div className="flex justify-between left-0 bottom-25 max-w-sm px-4 my-10 self-center">
-				<Link to={"/history-of-vodka"}>
+				<Link to={"/juniper-flavored-spirit-drinks"}>
 					<button
 						className={`
                 group inline-flex items-center rounded-md bg-slate-700 px-3 py-2 mx-1 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
@@ -197,7 +199,7 @@ export default function ProductionOfVodka() {
 						<span>Previous </span>
 					</button>
 				</Link>
-				<Link to={"/discussing-vodkas-taste-and-style"}>
+				<Link to={"/tasting-and-serving-gin"}>
 					<button
 						className={`
                 group inline-flex items-center rounded-md bg-slate-700 px-3 py-2 mx-1 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}

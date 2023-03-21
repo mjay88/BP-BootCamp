@@ -22,6 +22,16 @@ import HistoryOfVodka from "./routes/Vodka/HistoryOfVodka";
 import ProductionOfVodka from "./routes/Vodka/ProductionOfVodka";
 import DiscussingVodkasTasteAndStyle from "./routes/Vodka/DiscussingVodkasTasteAndStyle";
 import BaijuShochuAndSoju from "./routes/Vodka/BaijuShochuAndSoju";
+//gin
+import HistoryOfGin from "./routes/Gin/HistoryOfGin";
+import ProductionOfGin from "./routes/Gin/ProductionOfGin";
+import LeadingStylesOfGin from "./routes/Gin/LeadingStylesOfGin";
+import JuniperFlavoredSpiritDrinks from "./routes/Gin/JuniperFlavoredSpiritDrinks";
+import AniseFlavoredSpiritDrinks from "./routes/Gin/AniseFlavoredSpiritDrinks";
+import TastingAndServingGin from "./routes/Gin/TastingAndServingGin";
+//whiskey
+import HistoryOfWhiskey from "./routes/Whiskey/HistoryOfWhiskey";
+import ProductionOfWhiskey from "./routes/Whiskey/ProductionOfWhiskey";
 
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -31,7 +41,7 @@ import Module from "./components/Module";
 //auth providerr takes priotiry over other state
 import { AuthProvider } from "./Contexts/AuthContext/index";
 //withRouter???
-
+//top level app should only render top level routes eg, vodka/     not vodka/:production-of-vodka
 const App = () => {
 	return (
 		<AuthProvider>
@@ -59,50 +69,44 @@ const App = () => {
 					<Route
 						path="history-of-vodka"
 						//replace the div with the History of Vodka component
-						// element={<HistoryOfVodka />}
+						//element={<HistoryOfVodka />}
 						element={<Module />}
 					/>
 					<Route path="production-of-vodka" element={<ProductionOfVodka />} />
 					<Route
 						path="discussing-vodkas-taste-and-style"
 						element={<DiscussingVodkasTasteAndStyle />}
+						// element={<Module />}
 					/>
 
 					<Route
-						path="other-neutral-spirits"
-						element={<div>Other Neutral Spirits</div>}
-					/>
-					<Route
-						path="baijiu-shochu-and-soju"
+						path="baiju-shochu-and-soju"
 						element={<BaijuShochuAndSoju />}
 					/>
-					<Route
-						path="production-of-gin"
-						element={<div>Production of Gin</div>}
-					/>
+
+					<Route path="history-of-gin" element={<HistoryOfGin />} />
+					<Route path="production-of-gin" element={<ProductionOfGin />} />
 					<Route
 						path="leading-styles-of-gin"
-						element={<div>Leading Styles of Gin</div>}
-					/>
-					<Route
-						path="other-flavored-spirits"
-						element={<div>Other Flavored Spirits</div>}
+						//element={<LeadingStylesOfGin />}
+						element={<Module />}
 					/>
 					<Route
 						path="juniper-flavored-spirit-drinks"
-						element={<div>Juniper Flavored Spirits Drinks</div>}
+						element={<JuniperFlavoredSpiritDrinks />}
 					/>
 					<Route
 						path="anise-flavored-spirit-drinks"
-						element={<div>Anise flavored spirits drinks</div>}
+						element={<AniseFlavoredSpiritDrinks />}
 					/>
 					<Route
-						path="history-of-whiskey"
-						element={<div>History of Whiskey</div>}
+						path="tasting-and-serving-gin"
+						element={<TastingAndServingGin />}
 					/>
+					<Route path="history-of-whiskey" element={<HistoryOfWhiskey />} />
 					<Route
 						path="production-of-whiskey"
-						element={<div>Production of Whiskey</div>}
+						element={<ProductionOfWhiskey />}
 					/>
 					<Route path="scotch-whiskey" element={<div>Scotch Whiskey</div>} />
 					<Route path="irish-whiskey" element={<div>Irish Whiskey</div>} />
@@ -141,11 +145,13 @@ const App = () => {
 					<Route path="cognac" element={<div>Cognac</div>} />
 					<Route
 						path="the-cognac-region"
-						element={<div>The Cognac Region</div>}
+						// element={<div>The Cognac Region</div>} //
+						element={<Module />}
 					/>
 					<Route
 						path="production-of-cognac"
-						element={<div>Production of Cognac</div>}
+						// element={<div>Production of Cognac</div>}
+						element={<Module />}
 					/>
 					<Route path="armagnac" element={<div>Armagnac</div>} />
 					<Route

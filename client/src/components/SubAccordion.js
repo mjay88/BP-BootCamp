@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 import { Link, useLocation, useOutletContext } from "react-router-dom";
 import AccordionDropdown from "./AccordionDropDown";
 
-export default function SubAccordion({ submenus }) {
+export default function SubAccordion({ submenus, parentIndex }) {
 	// const [content, setContent] = useOutletContext();
 	// const [data, setData] = useState({});
 
@@ -25,11 +25,11 @@ export default function SubAccordion({ submenus }) {
 										//pass the entires menu through here, then its easy to get previous and next
 										state={{
 											from: submenu.title,
+											url: submenu.url,
 											content: submenu.content,
 											key: index,
-											currentSubmenusIdx: submenus.indexOf(submenu),
-											precedingUrl: "",
-											nextUrl: "",
+											parentIndex: parentIndex,
+											indexInSubmenu: index,
 											navTree: submenus,
 										}}
 									>
@@ -62,6 +62,8 @@ export default function SubAccordion({ submenus }) {
 										<Disclosure.Panel className="px-1 pt-0 pb-0 text-sm text-gray-500">
 											<AccordionDropdown
 												submenus={submenu.submenu}
+												parentIndex={parentIndex}
+												submenuIndex={index}
 											></AccordionDropdown>
 										</Disclosure.Panel>
 									) : (
